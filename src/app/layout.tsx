@@ -1,15 +1,38 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Load Geist fonts from the nodeGeist-Regular.woff2_modules directory
+const geistSans = localFont({
+  src: [
+    {
+      path: '../../node_modules/geist/dist/fonts/geist-sans/Geist-Light.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../node_modules/geist/dist/fonts/geist-sans/Geist-Light.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist-sans',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const geistMono = localFont({
+  src: [
+    {
+      path: '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Light.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Light.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist-mono',
 });
 
 export const metadata: Metadata = {
@@ -19,14 +42,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         {children}
       </body>
     </html>
